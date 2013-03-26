@@ -1892,6 +1892,7 @@ static int tavarua_fops_open(struct file *file)
 	if (bahama_present == -ENODEV)
 		return -ENODEV;
 
+	marimba_set_fm_status(radio->marimba, true);
 	if (bahama_present)
 		radio->marimba->mod_id = SLAVE_ID_BAHAMA;
 	else
@@ -2026,7 +2027,6 @@ static int tavarua_fops_open(struct file *file)
 
 	radio->handle_irq = 0;
 	radio->marimba->mod_id = SLAVE_ID_BAHAMA;
-	marimba_set_fm_status(radio->marimba, true);
 	return 0;
 
 
@@ -2042,6 +2042,7 @@ open_err_req_irq:
 config_i2s_err:
 	radio->pdata->fm_shutdown(radio->pdata);
 open_err_setup:
+	marimba_set_fm_status(radio->marimba, false);
 	radio->handle_irq = 1;
 	atomic_inc(&radio->users);
 	return retval;
