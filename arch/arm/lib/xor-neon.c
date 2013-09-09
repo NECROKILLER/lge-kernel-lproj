@@ -9,6 +9,9 @@
  */
 
 #include <linux/raid/xor.h>
+#include <linux/module.h>
+
+MODULE_LICENSE("GPL");
 
 #include <linux/module.h>
 
