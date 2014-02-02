@@ -1,6 +1,7 @@
 /* kernel/power/fbearlysuspend.c
  *
- * Copyright (C) 2005-2008 Google, Inc.
+ * Copyright (C) 2005-2014 Google, Inc.
+ * Copyright (C) 2014 Slim+ Project
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -31,7 +32,7 @@ static enum {
 	FB_STATE_DRAWING_OK,
 } fb_state;
 
-int fbearlysuspend_delay = 0;
+int fbearlysuspend_delay = 350;
 /* tell userspace to stop drawing, wait for it to stop */
 static void stop_drawing_early_suspend(struct early_suspend *h)
 {
