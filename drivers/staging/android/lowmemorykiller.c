@@ -40,7 +40,7 @@
 #include <linux/rcupdate.h>
 #include <linux/notifier.h>
 #include <linux/swap.h>
-#if defined (CONFIG_SWAP) && (defined (CONFIG_ZSWAP) || defined (CONFIG_ZRAM))
+#if defined (CONFIG_SWAP) && defined (CONFIG_ZRAM)
 #include <linux/fs.h>
 #endif
 #include <linux/mutex.h>
@@ -245,7 +245,7 @@ static int lowmem_shrink(struct shrinker *s, struct shrink_control *sc)
 	int other_free;
 	int other_file;
 	unsigned long nr_to_scan = sc->nr_to_scan;
-#if defined (CONFIG_SWAP) && (defined (CONFIG_ZSWAP) || defined (CONFIG_ZRAM))
+#if defined (CONFIG_SWAP) && defined (CONFIG_ZRAM)
 	struct sysinfo si;
 #endif
 
@@ -254,7 +254,7 @@ static int lowmem_shrink(struct shrinker *s, struct shrink_control *sc)
 			return 0;
 	}
 
-#if defined (CONFIG_SWAP) && (defined (CONFIG_ZSWAP) || defined (CONFIG_ZRAM))
+#if defined (CONFIG_SWAP) && defined (CONFIG_ZRAM)
 	si_swapinfo(&si);
 	other_free = global_page_state(NR_FREE_PAGES);
 	other_file = global_page_state(NR_FILE_PAGES) -
