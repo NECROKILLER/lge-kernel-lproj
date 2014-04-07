@@ -1,6 +1,6 @@
 ui_print("");
 ui_print("=================================");
-ui_print("|      |* CrystalRoms  *|       |");
+ui_print("|      |* LGegacy Kernel  *|       |");
 ui_print("=================================");
 ui_print("");
 ui_print("******presents caf 3.4 kernel******");
