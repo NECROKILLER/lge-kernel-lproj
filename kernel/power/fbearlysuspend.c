@@ -1,6 +1,7 @@
 /* kernel/power/fbearlysuspend.c
  *
- * Copyright (C) 2005-2008 Google, Inc.
+ * Copyright (C) 2005-2014 Google, Inc.
+ * Copyright (C) 2014 Slim+ Project
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -13,6 +14,7 @@
  *
  */
 
+#include <linux/delay.h>
 #include <linux/earlysuspend.h>
 #include <linux/module.h>
 #include <linux/wait.h>
@@ -30,11 +32,16 @@ static enum {
 	FB_STATE_DRAWING_OK,
 } fb_state;
 
+int fbearlysuspend_delay = 350;
 /* tell userspace to stop drawing, wait for it to stop */
 static void stop_drawing_early_suspend(struct early_suspend *h)
 {
 	int ret;
 	unsigned long irq_flags;
+	
+     /* FIXME: earlysuspend breaks androids CRT-off animation
+      * Sleep a little bit to get it played properly */
+        msleep(fbearlysuspend_delay);
 
 	spin_lock_irqsave(&fb_state_lock, irq_flags);
 	fb_state = FB_STATE_REQUEST_STOP_DRAWING;

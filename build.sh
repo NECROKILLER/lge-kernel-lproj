@@ -10,18 +10,20 @@ daytime=$(date +%d"-"%m"-"%Y"_"%H"-"%M)
 
 location=.
 vendor=lge
-version=3.4.0
+version=3.4.11
 
 if [ -z $target ]; then
     echo "choose your target device"
     echo "1) l3 ii"
     echo "2) l5"
-    echo "3) l7"
-    read -p "1/2/3: " choice
+    echo "3) l7_P700"
+    echo "4) l7_P705"
+    read -p "1/2/3/4: " choice
     case "$choice" in
         1 ) export target=e430 ; export defconfig=vee3-rev_11_led_defconfig;;
         2 ) export target=e610 ; export defconfig=cyanogenmod_m4_defconfig;;
         3 ) export target=p700 ; export defconfig=cyanogenmod_u0_defconfig;;
+        4 ) export target=p705 ; export defconfig=cyanogenmod_u0_nonfc_defconfig;;
         * ) echo "invalid choice"; sleep 2 ; $0;;
     esac
 fi # [ -z $target ]
